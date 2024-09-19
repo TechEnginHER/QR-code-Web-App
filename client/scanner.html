@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>QR Scanner</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="hamburger-menu" id="hamburgerMenu">
+        <div class="menu-content" id="menuContent">
+            <h2 id="teamName"></h2>
+            <ul>
+                <li><a href="scanner.html">Scan QR</a></li>
+                <li><a href="clues.html">Saved Clues</a></li>
+                <li><a href="index.html">Log Out</a></li>
+            </ul>
+            <span class="close" id="closeMenu">&times;</span>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="hamburger-icon" id="hamburgerIcon">&#9776;</div>
+        <div id="scanner-container">
+           <div id="reader"></div>
+        </div>
+    </div>
+
+    <div id="qr-popup" class="popup" style="display: none;">
+        <div class="popup-content">
+            <h2>You just discovered a clue!</h2>
+            <p id="qr-info"></p>
+            <button id="save-clue-btn">Save Clue</button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script src="scanner.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

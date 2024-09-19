@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Family Night Scavenger Hunt</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="hero">
+        <h1>FAMILY SCAVENGER HUNT</h1>
+    </div>
+    <div class="options-container">
+        <div class="option" id="createTeam">Form A New Team</div>
+        <div class="option" id="loginTeam">Log In to Your Team</div>
+    </div>
+
+    <!-- Create Team Popup -->
+    <div id="createTeamPopup" class="popup">
+        <div class="popup-content">
+            <span class="close" id="closeCreate">&times;</span>
+            <h2>New Team</h2>
+            <form id="createTeamForm">
+                <input type="text" id="newTeamName" placeholder="Team Name" required>
+                <input type="password" id="newTeamPasscode" placeholder="Secret Passcode" required>
+                <button type="submit">Create</button>
+            </form>
+            <p style="visibility: hidden; text-align: center;" id="invalid-team-creation">Team already exists. Log In.</p>
+        </div>
+    </div>
+
+    <!-- Log In Popup -->
+    <div id="loginPopup" class="popup">
+        <div class="popup-content">
+            <span class="close" id="closeLogin">&times;</span>
+            <h2>Log In to Your Team</h2>
+            <form id="loginForm">
+                <input type="text" id="loginTeamName" placeholder="Team Name" required>
+                <input type="password" id="loginTeamPasscode" placeholder="Secret Passcode" required>
+                <button type="submit">Log In</button>
+            </form>
+            <p style="visibility: hidden; text-align: center;" id="invalid-team-login">Wrong Details. Create a Team if you don't have one.</p>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
