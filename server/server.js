@@ -17,28 +17,15 @@ mongoose.connect(uri, {
     .then(() => console.log('Connected to MongoDB'))
     .catch((err) => console.error('Failed to connect to MongoDB', err));
 
-// CORS configuration
-app.use(cors({
-    origin: 'https://familyscavengerhunt.netlify.app',
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
-}));
+// CORS configuration (not needed if frontend and backend are on the same server)
+app.use(cors());
 
-// Handle preflight requests
-app.options('*', cors());
-
-app.use(bodyParser.json());
+// Serve static files from the 'client' directory
 app.use(express.static(path.join(__dirname, '../client')));
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/index.html'));
-});
+app.use(bodyParser.json());
 
-// Handle preflight requests
-app.options('*', cors()); 
-git 
-
+// API routes
 // Define the Team schema and model
 const teamSchema = new mongoose.Schema({
     name: { type: String, unique: true, required: true },
@@ -54,8 +41,6 @@ const clueSchema = new mongoose.Schema({
 });
 
 const Clue = mongoose.model('Clue', clueSchema);
-
-
 
 // Route to get team name by team ID
 app.get('/teams/:name', async (req, res) => {
@@ -159,6 +144,10 @@ app.delete('/clues/:id', async (req, res) => {
     }
 });
 
+// Serve the index.html file for any unmatched routes
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/index.html'));
+});
 
 // Start the server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -1,5 +1,11 @@
 {
+  "scripts": {
+    "start": "node server/server.js",       
+    "build": "cd client && npm install && npm run build",
+    "heroku-postbuild": "npm run build"      
+  },
   "dependencies": {
     "cors": "^2.8.5"
+   
   }
 }

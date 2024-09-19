@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: scavengerhunt
+    env: node
+    buildCommand: npm run build
+    startCommand: npm start
+    repo: https://github.com/CHIDINMAOHAM/QR-code-Web-App
+    branch: main
+    runtime: node
+
