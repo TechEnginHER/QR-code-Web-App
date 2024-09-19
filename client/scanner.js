@@ -1,3 +1,5 @@
+const backendURL = 'https://qr-code-web-app-wu0o.onrender.com'; //Render backend URL
+
 const html5QrCode = new Html5Qrcode("reader");
 let scanning = true;
 
@@ -69,7 +71,7 @@ async function saveClue(clue) {
     const teamName = sessionStorage.getItem('teamName');
 
     try {
-        const response = await fetch('http://localhost:3000/clues', {
+        const response = await fetch(`${backendURL}/clues`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

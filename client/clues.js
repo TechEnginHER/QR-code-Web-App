@@ -1,3 +1,6 @@
+const backendURL = 'https://qr-code-web-app-wu0o.onrender.com'; //Render backend URL
+
+
 document.addEventListener('DOMContentLoaded', displaySavedClues);
 
 async function displaySavedClues() {
@@ -6,7 +9,7 @@ async function displaySavedClues() {
 
     try {
         // Make a GET request to fetch clues for the team
-        const response = await fetch(`http://localhost:3000/clues/${teamName}`);
+        const response = await fetch(`${backendURL}/clues/${teamName}`);
         const clues = await response.json();
 
         if (clues.length === 0) {
@@ -66,7 +69,7 @@ async function displaySavedClues() {
 async function deleteClue(clueId) {
     try {
         // Make a DELETE request to remove the clue from the server
-        const response = await fetch(`http://localhost:3000/clues/${clueId}`, {
+        const response = await fetch(`${backendURL}/clues/${clueId}`, {
             method: 'DELETE',
         });
 

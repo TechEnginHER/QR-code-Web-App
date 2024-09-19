@@ -1,9 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
-
-
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,6 +16,11 @@ mongoose.connect(uri, {
 })
     .then(() => console.log('Connected to MongoDB'))
     .catch((err) => console.error('Failed to connect to MongoDB', err));
+
+// CORS configuration
+app.use(cors({
+    origin: 'https://familyscavengerhunt.netlify.app/' // Replace with your Netlify domain
+}));
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client')));

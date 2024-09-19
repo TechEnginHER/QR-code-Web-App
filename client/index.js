@@ -1,3 +1,5 @@
+const backendURL = 'https://qr-code-web-app-wu0o.onrender.com'; // Render backend URL
+
 // Show popups
 const createTeam = document.getElementById('createTeam');
 if (createTeam) {
@@ -49,7 +51,7 @@ if (closeLogin) {
 // Add this function to handle team creation
 async function createNewTeam(teamName, passcode) {
     try {
-        const response = await fetch('http://localhost:3000/teams', {
+        const response = await fetch(`${backendURL}/teams`, { // Use template literals correctly
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -86,7 +88,7 @@ async function createNewTeam(teamName, passcode) {
 // Add this function to handle team login
 async function loginTeam(teamName, passcode) {
     try {
-        const response = await fetch('http://localhost:3000/teams/login', {
+        const response = await fetch(`${backendURL}/teams/login`, { // Use template literals correctly
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

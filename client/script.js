@@ -1,3 +1,5 @@
+const backendURL = 'https://qr-code-web-app-wu0o.onrender.com'; //Render backend URL
+
 document.addEventListener('DOMContentLoaded', () => {
     // Hide hamburger menu on index page
     if (window.location.pathname.endsWith('index.html')) {
