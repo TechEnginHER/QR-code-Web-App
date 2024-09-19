@@ -8,7 +8,7 @@ const audio = new Audio('client/330046__paulmorek__beep-03-positive.wav'); //  p
 let userInteractionOccurred = false;
 
 // Allow audio playback on user interaction
-document.querySelector('scan-qr-btn').addEventListener('click', () => {
+document.querySelector('.scan-qr-btn').addEventListener('click', () => {
     // Try playing the sound in a muted way
     audio.muted = true;
     audio.play().then(() => {
