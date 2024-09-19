@@ -1,5 +1,3 @@
-const backendURL = 'https://qrcodescavengerhuntwebapp.onrender.com'; //Render backend URL
-
 document.addEventListener('DOMContentLoaded', () => {
     // Hide hamburger menu on index page
     if (window.location.pathname.endsWith('index.html')) {
