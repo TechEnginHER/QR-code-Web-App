@@ -19,7 +19,9 @@ mongoose.connect(uri, {
 
 // CORS configuration
 app.use(cors({
-    origin: 'https://familyscavengerhunt.netlify.app/' // Replace with your Netlify domain
+    origin: 'https://familyscavengerhunt.netlify.app', // Correct domain for Netlify
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true
 }));
 
 app.use(bodyParser.json());
@@ -28,7 +30,6 @@ app.use(express.static(path.join(__dirname, '../client')));
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/index.html'));
 });
-
 
 // Define the Team schema and model
 const teamSchema = new mongoose.Schema({
