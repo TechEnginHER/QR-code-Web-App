@@ -51,7 +51,7 @@ if (closeLogin) {
 // Add this function to handle team creation
 async function createNewTeam(teamName, passcode) {
     try {
-        const response = await fetch(`${backendURL}/teams`, { // Use template literals correctly
+        const response = await fetch(`$/teams`, { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
