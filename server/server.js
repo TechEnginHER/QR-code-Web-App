@@ -32,6 +32,10 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/index.html'));
 });
 
+// Handle preflight requests
+app.options('*', cors()); 
+git 
+
 // Define the Team schema and model
 const teamSchema = new mongoose.Schema({
     name: { type: String, unique: true, required: true },
@@ -47,6 +51,8 @@ const clueSchema = new mongoose.Schema({
 });
 
 const Clue = mongoose.model('Clue', clueSchema);
+
+
 
 // Route to get team name by team ID
 app.get('/teams/:name', async (req, res) => {
@@ -150,8 +156,6 @@ app.delete('/clues/:id', async (req, res) => {
     }
 });
 
-// Handle preflight requests
-app.options('*', cors()); 
 
 // Start the server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
