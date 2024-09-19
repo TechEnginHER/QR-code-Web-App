@@ -19,11 +19,14 @@ mongoose.connect(uri, {
 
 // CORS configuration
 app.use(cors({
-    origin: 'https://familyscavengerhunt.netlify.app', // Replace with your Netlify domain
+    origin: 'https://familyscavengerhunt.netlify.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true // Allow credentials if needed
+    credentials: true
 }));
+
+// Handle preflight requests
+app.options('*', cors());
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client')));
