@@ -3,6 +3,42 @@ const backendURL = 'https://qrcodescavengerhuntwebapp.onrender.com'; //Render ba
 
 document.addEventListener('DOMContentLoaded', displaySavedClues);
 
+
+const audio = new Audio('client/330046__paulmorek__beep-03-positive.wav'); //  path to your sound file
+
+// Flag to check if user interaction has occurred
+let userInteractionOccurred = false;
+
+// Allow audio playback on user interaction
+document.querySelector('scan-qr-btn').addEventListener('click', () => {
+    // Try playing the sound in a muted way
+    audio.muted = true;
+    audio.play().then(() => {
+        // If playback succeeds, mark user interaction
+        userInteractionOccurred = true;
+        audio.pause();
+        audio.muted = false;
+        console.log('User interaction registered. Ready to play sound on QR detection.');
+    }).catch((error) => {
+        console.error('Error during user interaction:', error);
+    });
+});
+
+// Allow audio playback on user interaction
+document.querySelector('#find-clues-btn').addEventListener('click', () => {
+    // Try playing the sound in a muted way
+    audio.muted = true;
+    audio.play().then(() => {
+        // If playback succeeds, mark user interaction
+        userInteractionOccurred = true;
+        audio.pause();
+        audio.muted = false;
+        console.log('User interaction registered. Ready to play sound on QR detection.');
+    }).catch((error) => {
+        console.error('Error during user interaction:', error);
+    });
+});
+
 async function displaySavedClues() {
     const cluesList = document.getElementById('clues-list');
     const teamName = sessionStorage.getItem('teamName');
