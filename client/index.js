@@ -48,10 +48,11 @@ if (closeLogin) {
     });
 }
 
-// Add this function to handle team creation
+// Function to handle team creation
 async function createNewTeam(teamName, passcode) {
     try {
-        const response = await fetch(`$/teams`, { 
+        console.log(`Sending request to: ${backendURL}/teams`);
+        const response = await fetch(`${backendURL}/teams`, { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -62,21 +63,18 @@ async function createNewTeam(teamName, passcode) {
             })
         });
 
-        if (response.ok) {
-            // Team created successfully
-            const team = await response.json();
-            console.log('Team created:', team);
-            // Save the team name in session storage for reference
-            sessionStorage.setItem('teamName', teamName);
-            // Redirect to the team's dashboard or profile page
-            window.location.href = 'clues.html';
-        } else {
-            // Handle errors like duplicate team names
-            const errorData = await response.json();
-            const errorMessage = document.getElementById('invalid-team-creation');
-            errorMessage.textContent = 'Team already exists. Please choose a different name or log in to existing team';
-            errorMessage.style.visibility = 'visible'; // Show the error message
+        if (!response.ok) {
+            const textResponse = await response.text();
+            console.error('Server response:', response.status, textResponse);
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
+
+        const data = await response.json();
+        console.log('Team created:', data);
+        // Save the team name in session storage for reference
+        sessionStorage.setItem('teamName', teamName);
+        // Redirect to the team's dashboard or profile page
+        window.location.href = 'clues.html';
     } catch (error) {
         console.error('Error creating team:', error);
         const errorMessage = document.getElementById('invalid-team-creation');
@@ -85,10 +83,11 @@ async function createNewTeam(teamName, passcode) {
     }
 }
 
-// Add this function to handle team login
+// Function to handle team login
 async function loginTeam(teamName, passcode) {
     try {
-        const response = await fetch(`${backendURL}/teams/login`, { // Use template literals correctly
+        console.log(`Sending request to: ${backendURL}/teams/login`);
+        const response = await fetch(`${backendURL}/teams/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -99,21 +98,18 @@ async function loginTeam(teamName, passcode) {
             })
         });
 
-        if (response.ok) {
-            // Login successful
-            const team = await response.json();
-            console.log('Team logged in:', team);
-            // Save the team name in session storage for reference
-            sessionStorage.setItem('teamName', teamName);
-            // Redirect to the team's dashboard or profile page
-            window.location.href = 'clues.html';
-        } else {
-            // Handle login errors
-            const errorData = await response.json();
-            const errorMessage = document.getElementById('invalid-team-login');
-            errorMessage.textContent = 'Wrong team details.';
-            errorMessage.style.visibility = 'visible'; // Show the error message
+        if (!response.ok) {
+            const textResponse = await response.text();
+            console.error('Server response:', response.status, textResponse);
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
+
+        const data = await response.json();
+        console.log('Team logged in:', data);
+        // Save the team name in session storage for reference
+        sessionStorage.setItem('teamName', teamName);
+        // Redirect to the team's dashboard or profile page
+        window.location.href = 'clues.html';
     } catch (error) {
         console.error('Error logging in:', error);
         const errorMessage = document.getElementById('invalid-team-login');

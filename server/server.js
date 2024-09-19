@@ -17,13 +17,17 @@ mongoose.connect(uri, {
     .then(() => console.log('Connected to MongoDB'))
     .catch((err) => console.error('Failed to connect to MongoDB', err));
 
-// CORS configuration (not needed if frontend and backend are on the same server)
+// CORS configuration
 app.use(cors());
 
-// Serve static files from the 'client' directory
-app.use(express.static(path.join(__dirname, '../client')));
-
+// Parse JSON bodies
 app.use(bodyParser.json());
+
+// Logging middleware
+app.use((req, res, next) => {
+    console.log(`${req.method} request to ${req.url}`);
+    next();
+});
 
 // API routes
 // Define the Team schema and model
@@ -55,6 +59,7 @@ app.get('/teams/:name', async (req, res) => {
 
         res.json({ teamName: team.name });
     } catch (error) {
+        console.error('Error getting team:', error);
         res.status(500).json({ message: 'Server error' });
     }
 });
@@ -73,6 +78,7 @@ app.post('/teams', async (req, res) => {
         await newTeam.save();
         res.status(201).json({ message: 'Team created successfully.' });
     } catch (error) {
+        console.error('Error creating team:', error);
         if (error.code === 11000) {
             res.status(400).json({ message: 'Team name already exists.' });
         } else {
@@ -99,6 +105,7 @@ app.post('/teams/login', async (req, res) => {
 
         res.status(200).json({ message: 'Login successful.' });
     } catch (error) {
+        console.error('Error logging in:', error);
         res.status(500).json({ message: 'Server error. Please try again later.' });
     }
 });
@@ -118,6 +125,7 @@ app.post('/clues', async (req, res) => {
         await clue.save();
         res.status(201).json(clue);
     } catch (error) {
+        console.error('Error saving clue:', error);
         res.status(500).json({ message: 'Server error' });
     }
 });
@@ -129,6 +137,7 @@ app.get('/clues/:teamName', async (req, res) => {
         const clues = await Clue.find({ teamName });
         res.json(clues);
     } catch (error) {
+        console.error('Error getting clues:', error);
         res.status(500).json({ message: 'Server error' });
     }
 });
@@ -140,9 +149,13 @@ app.delete('/clues/:id', async (req, res) => {
         await Clue.findByIdAndDelete(id);
         res.status(204).end();
     } catch (error) {
+        console.error('Error deleting clue:', error);
         res.status(500).json({ message: 'Server error' });
     }
 });
+
+// Serve static files from the 'client' directory
+app.use(express.static(path.join(__dirname, '../client')));
 
 // Serve the index.html file for any unmatched routes
 app.get('*', (req, res) => {
