@@ -1,8 +1,6 @@
 const backendURL = 'https://qrcodescavengerhuntwebapp.onrender.com'; //Render backend URL
 
-
 document.addEventListener('DOMContentLoaded', displaySavedClues);
-
 
 const audio = new Audio('client/330046__paulmorek__beep-03-positive.wav'); //  path to your sound file
 
