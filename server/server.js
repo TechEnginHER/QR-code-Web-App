@@ -19,9 +19,10 @@ mongoose.connect(uri, {
 
 // CORS configuration
 app.use(cors({
-    origin: 'https://familyscavengerhunt.netlify.app', // Correct domain for Netlify
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true
+    origin: 'https://familyscavengerhunt.netlify.app', // Replace with your Netlify domain
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true // Allow credentials if needed
 }));
 
 app.use(bodyParser.json());
@@ -148,6 +149,9 @@ app.delete('/clues/:id', async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 });
+
+// Handle preflight requests
+app.options('*', cors()); 
 
 // Start the server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
