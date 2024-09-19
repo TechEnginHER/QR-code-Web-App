@@ -1,16 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const path = require('path'); // Add this line
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Use environment variable for MongoDB URI
+const uri = process.env.MONGODB_URI;
 
-// Replace with your MongoDB connection string
-const uri = 'mongodb+srv://chidinmaoham:o77cmu7ME0ykdOT3@cluster0.ksdjd.mongodb.net/ScavengerHuntApp?retryWrites=true&w=majority&appName=Cluster0';
-
-// Connect to MongoDB using Mongoose
 mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -18,16 +16,13 @@ mongoose.connect(uri, {
     .then(() => console.log('Connected to MongoDB'))
     .catch((err) => console.error('Failed to connect to MongoDB', err));
 
-// Middleware to parse JSON data
 app.use(bodyParser.json());
-
-// Serve static files from the client directory
 app.use(express.static(path.join(__dirname, '../client')));
 
-// Route for the root URL
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/index.html'));
 });
+
 
 // Define the Team schema and model
 const teamSchema = new mongoose.Schema({
