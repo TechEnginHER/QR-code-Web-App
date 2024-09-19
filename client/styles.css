@@ -297,11 +297,9 @@ div#reader div {
 
 #qr-popup .popup-content {
     background-color: #fff;
-    padding: 60px 20px;
     border-radius: 5px;
     width: 80%;
     max-width: 400px;
-    padding-bottom: 40px;
 }
 
 #qr-popup h2 {
@@ -311,11 +309,6 @@ div#reader div {
     font-size: 1.5em;
     line-height: 1.4;
 }
-#qr-popup button {
-    margin-top: 40px;
-    margin-right: 10px;
-}
-
 #clues-list li{
     line-height: 1.6;
     padding: 10px;
