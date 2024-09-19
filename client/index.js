@@ -48,9 +48,22 @@ if (closeLogin) {
     });
 }
 
+// Function to show the loading spinner
+function showLoadingSpinner() {
+    document.getElementById('loading-spinner').style.display = 'flex';
+}
+
+// Function to hide the loading spinner
+function hideLoadingSpinner() {
+    document.getElementById('loading-spinner').style.display = 'none';
+}
+
 // Function to handle team creation
 async function createNewTeam(teamName, passcode) {
     try {
+        // Show the loading spinner when the request starts
+        showLoadingSpinner();
+
         console.log(`Sending request to: ${backendURL}/teams`);
         const response = await fetch(`${backendURL}/teams`, { 
             method: 'POST',
@@ -75,17 +88,24 @@ async function createNewTeam(teamName, passcode) {
         sessionStorage.setItem('teamName', teamName);
         // Redirect to the team's dashboard or profile page
         window.location.href = 'clues.html';
-    } catch (error) {
+    } 
+    catch (error) {
         console.error('Error creating team:', error);
         const errorMessage = document.getElementById('invalid-team-creation');
         errorMessage.textContent = 'An error occurred while creating the team. Please try again later.';
         errorMessage.style.visibility = 'visible'; // Show the error message
+    } 
+    finally {
+        // Hide the loading spinner after the request is completed, either successfully or with error
+        hideLoadingSpinner();
     }
 }
 
 // Function to handle team login
 async function loginTeam(teamName, passcode) {
     try {
+          // Show the loading spinner when the request starts
+          showLoadingSpinner();
         console.log(`Sending request to: ${backendURL}/teams/login`);
         const response = await fetch(`${backendURL}/teams/login`, {
             method: 'POST',
@@ -115,6 +135,9 @@ async function loginTeam(teamName, passcode) {
         const errorMessage = document.getElementById('invalid-team-login');
         errorMessage.textContent = 'Incorrect team name or passcode. Please try again.';
         errorMessage.style.visibility = 'visible'; // Show the error message
+    }finally {
+        // Hide the loading spinner after the request is completed, either successfully or with error
+        hideLoadingSpinner();
     }
 }
 

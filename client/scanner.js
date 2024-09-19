@@ -3,20 +3,27 @@ const backendURL = 'https://qrcodescavengerhuntwebapp.onrender.com'; //Render ba
 const html5QrCode = new Html5Qrcode("reader");
 let scanning = true;
 
+const sound = new Audio('client/330046__paulmorek__beep-03-positive.wav'); //  path to your sound file
+
 const qrCodeSuccessCallback = (decodedText, decodedResult) => {
     if (scanning) {
         scanning = false;
         html5QrCode.pause();
+
+        sound.play().catch((error) => {
+            console.error('Error playing sound:', error);
+        });
+        
         showPopup(decodedText);
     }
 };
 
-const width = Math.min(window.innerWidth, window.innerHeight) * 0.9;
-//const height = width; // Make it square for better compatibility
+const width = Math.min(window.innerWidth, window.innerHeight) * 0.7;
+const height = width; // square for better compatibility
 
 const config = { 
     fps: 10,
-    qrbox: { width: 290, height: 320 },
+    qrbox: { width: width, height: height },
     aspectRatio: 1.0, // Use a square aspect ratio
     rememberLastUsedCamera: true
 };
