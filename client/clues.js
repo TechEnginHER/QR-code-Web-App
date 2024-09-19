@@ -1,4 +1,4 @@
-const backendURL = 'https://qr-code-web-app-wu0o.onrender.com'; //Render backend URL
+const backendURL = 'https://qrcodescavengerhuntwebapp.onrender.com'; //Render backend URL
 
 
 document.addEventListener('DOMContentLoaded', displaySavedClues);
