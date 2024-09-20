@@ -145,19 +145,6 @@ app.get('/clues/:teamName', async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 });
-
-// Route to delete a clue
-app.delete('/clues/:id', async (req, res) => {
-    const { id } = req.params;
-    try {
-        await Clue.findByIdAndDelete(id);
-        res.status(204).end();
-    } catch (error) {
-        console.error('Error deleting clue:', error);
-        res.status(500).json({ message: 'Server error' });
-    }
-});
-
 /// Serve static files from the 'client' directory
 app.use(express.static(path.join(__dirname, '../client'), {
     setHeaders: (res, path, stat) => {
