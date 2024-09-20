@@ -66,3 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Call updateTeamName when the page loads
     updateTeamName();
 });
+
+
+
+
+        
