@@ -22,7 +22,13 @@ document.querySelector('.scan-qr-btn').addEventListener('click', () => {
 });
 
 // Initialize the QrScanner from the qr-scanner library
-const videoElem = document.getElementById('reader');
+const videoElem = document.getElementById('scanner-video');
+
+// Add a safeguard for disablePictureInPicture
+if (videoElem && 'disablePictureInPicture' in videoElem) {
+    videoElem.disablePictureInPicture = true; // Prevents picture-in-picture mode
+}
+
 const qrScanner = new QrScanner(videoElem, result => {
     if (scanning) {
         scanning = false;
@@ -35,8 +41,10 @@ const qrScanner = new QrScanner(videoElem, result => {
             });
         }
 
-        showPopup(result); // Show the QR code content in the popup
+        showPopup(result.data); // Show the QR code content in the popup
     }
+}, {
+    returnDetailedScanResult: true // Switch to the new API for future compatibility
 });
 
 // Start the scanner
