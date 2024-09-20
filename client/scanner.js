@@ -77,7 +77,7 @@ function showPopup(qrContent) {
     const qrInfo = document.getElementById('qr-info');
     const saveButton = document.getElementById('save-clue-btn');
 
-    qrInfo.textContent = qrContent;
+    qrInfo.src = qrContent;
     popup.style.display = 'flex';
 
     saveButton.onclick = async () => {
@@ -141,7 +141,7 @@ async function saveClue(clue) {
 }
 
 function showSavedMessage() {
-    showMessage('Clue saved successfully!');
+    showMessage('Clue saved!');
 }
 
 function showAlreadySavedMessage() {
