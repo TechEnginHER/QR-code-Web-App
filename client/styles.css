@@ -193,6 +193,9 @@ button:active {
 /* Main content and hamburger icon adjustment */
 .main-content {
     padding: 20px;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
 }
 
 .hamburger-icon {
@@ -220,23 +223,20 @@ button:active {
     background: rgba(200, 200, 200, 0.5); /* Light grey transparent */
     z-index: 999; /* Make sure it's on top */
 }
-div#reader div {
-    z-index: 0 !important;
-}
+
 #scanner-container {
-    height: 100vh;
-    width: 100vw;
+    height: 87vh;
+    width: 90vw;
     overflow: hidden;
     position: relative;
+    margin-top: 70px;
 }
 .main-content {
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+
 }
 .main-contents {
-    padding: 0;
+    padding: 20px;
     height: 100vh;
     width: 100vw;
     position: relative;
@@ -255,7 +255,7 @@ div#reader div {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) !important;
     object-fit: cover;
 }
 
@@ -314,16 +314,29 @@ div#reader div {
 #qr-popup .popup-content {
     background-color: #fff;
     border-radius: 5px;
-    width: 80%;
+    width: 90%;
     max-width: 400px;
+    padding: 20px 8;
 }
 
 #qr-popup h2 {
     margin-top: 0;
 }
 #qr-info{
-    font-size: 1.1em;
+    font-size: 1.0em;
     line-height: 1.4;
+}
+button#save-clue-btn{
+    background-color: #2c140c;
+    color: #fff;
+    border: none;
+    padding: 14px 6px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 98%;
+    font-size: 25px;
+    margin-top: 18px;
+    transition: background-color 0.3s ease;
 }
 #clues-list li{
     line-height: 1.6;
