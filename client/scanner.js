@@ -7,6 +7,9 @@ let scanning = true;
 // Flag to check if user interaction has occurred
 let userInteractionOccurred = false;
 
+// Global variable to store the QR scanner instance
+let qrScanner = null;
+
 // Allow audio playback on user interaction
 document.querySelector('.scan-qr-btn').addEventListener('click', () => {
     audio.muted = true;
@@ -41,7 +44,7 @@ async function initializeScanner() {
             videoElem.disablePictureInPicture = true;
         }
 
-        const qrScanner = new QrScanner(
+        qrScanner = new QrScanner(
             videoElem,
             result => {
                 if (scanning) {
@@ -65,6 +68,7 @@ async function initializeScanner() {
         console.error('Failed to initialize QR Scanner:', error);
     }
 }
+
 // Call the initialization function when the page loads
 document.addEventListener('DOMContentLoaded', initializeScanner);
 
@@ -92,6 +96,17 @@ function closePopup() {
     const popup = document.getElementById('qr-popup');
     popup.style.display = 'none';
     resumeScanning();
+}
+
+function resumeScanning() {
+    scanning = true;
+    if (qrScanner) {
+        qrScanner.start().catch(err => {
+            console.error("Error resuming QR scanner:", err);
+        });
+    } else {
+        console.error("QR scanner not initialized");
+    }
 }
 
 function resumeScanning() {

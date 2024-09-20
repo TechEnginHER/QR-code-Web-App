@@ -223,9 +223,11 @@ button:active {
 div#reader div {
     z-index: 0 !important;
 }
-#scanner-container{
-    margin-top: 25vh;
+#scanner-container {
+    height: 100vh;
+    width: 100vw;
     overflow: hidden;
+    position: relative;
 }
 .main-content {
     padding: 20px;
@@ -234,13 +236,27 @@ div#reader div {
     height: 100vh;
 }
 .main-contents {
-    padding: 20px;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
 }
 .hamburger-icon {
     font-size: 40px;
     cursor: pointer;
     margin-bottom: 10px;
     align-self: flex-start;
+}
+#scanner-video {
+    min-height: 100%;
+    min-width: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
 }
 
 /* Scanner area */
