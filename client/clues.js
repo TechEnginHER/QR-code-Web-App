@@ -48,9 +48,9 @@ async function displaySavedClues() {
 
         if (clues.length === 0) {
             cluesList.innerHTML = `
-                <p>You haven't found any clues yet!</p>
+                <p>Tu n'as pas encore trouvé d'indices!</p>
                 <div>
-                    <a href="scanner.html" class="btn">Scan a QR</a>
+                    <a href="scanner.html" class="btn">Scannez un QR</a>
                 </div>
             `;
             document.getElementById('find-clues-btn').style.display = 'none';
@@ -68,7 +68,7 @@ async function displaySavedClues() {
         
     } catch (error) {
         console.error('Error fetching clues:', error);
-        cluesList.innerHTML = '<p>Error loading clues. Please try again later.</p>';
+        cluesList.innerHTML = '<p>Erreur de chargement des indices. Veuillez réessayer plus tard..</p>';
     }
 }
 

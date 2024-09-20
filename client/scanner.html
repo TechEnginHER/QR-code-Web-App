@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>QR Scanner</title>
+    <title>A la recherche de Claire</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -11,9 +11,9 @@
         <div class="menu-content" id="menuContent">
             <h2 id="teamName"></h2>
             <ul>
-                <li><a href="scanner.html" class="scan-qr-btn">Scan QR</a></li>
-                <li><a href="clues.html">Saved Clues</a></li>
-                <li><a href="index.html">Log Out</a></li>
+                <li><a href="scanner.html" class="scan-qr-btn">Scannez un QR.</a></li>
+                <li><a href="clues.html">Indices sauvegardés</a></li>
+                <li><a href="index.html">Déconnexion</a></li>
             </ul>
             <span class="close" id="closeMenu">&times;</span>
         </div>
@@ -28,9 +28,9 @@
 
     <div id="qr-popup" class="popup" style="display: none;">
         <div class="popup-content">
-            <h2>Clue!</h2>
-            <img src="" id="qr-info"></img>
-            <button id="save-clue-btn">Save Clue</button>
+            <h2>Indice!</h2>
+            <img src="" id="qr-info" style="max-width: 100%; height: auto;">
+            <button id="save-clue-btn">Sauvegarder l'indice</button>
         </div>
     </div>
     <script src="scanner.js"></script>

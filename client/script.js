@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (teamName) {
                 teamNameElement.textContent = `${teamName}`;
             } else {
-                teamNameElement.textContent = 'GUEST';
+                teamNameElement.textContent = 'INVITÉ';
             }
         }
     }

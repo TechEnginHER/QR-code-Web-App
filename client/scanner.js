@@ -77,7 +77,9 @@ function showPopup(qrContent) {
     const qrInfo = document.getElementById('qr-info');
     const saveButton = document.getElementById('save-clue-btn');
 
+    console.log("QR Content:", qrContent);
     qrInfo.src = qrContent;
+    
     popup.style.display = 'flex';
 
     saveButton.onclick = async () => {
