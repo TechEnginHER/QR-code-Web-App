@@ -18,7 +18,11 @@ mongoose.connect(uri, {
     .catch((err) => console.error('Failed to connect to MongoDB', err));
 
 // CORS configuration
-app.use(cors());
+app.use(cors({
+    origin: '*', // Be cautious with this in production
+    methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Parse JSON bodies
 app.use(bodyParser.json());
@@ -154,8 +158,14 @@ app.delete('/clues/:id', async (req, res) => {
     }
 });
 
-// Serve static files from the 'client' directory
-app.use(express.static(path.join(__dirname, '../client')));
+/// Serve static files from the 'client' directory
+app.use(express.static(path.join(__dirname, '../client'), {
+    setHeaders: (res, path, stat) => {
+        res.set('Access-Control-Allow-Origin', '*');
+        res.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+        res.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    }
+}));
 
 // Serve the index.html file for any unmatched routes
 app.get('*', (req, res) => {

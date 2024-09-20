@@ -11,7 +11,6 @@ let userInteractionOccurred = false;
 document.querySelector('.scan-qr-btn').addEventListener('click', () => {
     audio.muted = true;
     audio.play().then(() => {
-        // If playback succeeds, mark user interaction
         userInteractionOccurred = true;
         audio.pause();
         audio.muted = false;
@@ -21,42 +20,53 @@ document.querySelector('.scan-qr-btn').addEventListener('click', () => {
     });
 });
 
-// Initialize the QrScanner from the qr-scanner library
-const videoElem = document.getElementById('scanner-video');
-
-// Add a safeguard for disablePictureInPicture
-if (videoElem && 'disablePictureInPicture' in videoElem) {
-    videoElem.disablePictureInPicture = true; // Prevents picture-in-picture mode
+// Function to load the QR Scanner library and its worker
+async function loadQrScanner() {
+    try {
+        const QrScanner = await import('https://unpkg.com/qr-scanner@1.4.2/qr-scanner.min.js');
+        return QrScanner.default;
+    } catch (error) {
+        console.error('Failed to load QR Scanner:', error);
+        throw error;
+    }
 }
 
-const qrScanner = new QrScanner(
-    videoElem,
-    result => {
-        if (scanning) {
-            scanning = false;
-            qrScanner.stop(); // Stop the scanner after QR is detected
+// Initialize the QR scanner
+async function initializeScanner() {
+    try {
+        const QrScanner = await loadQrScanner();
+        const videoElem = document.getElementById('scanner-video');
 
-            // Play sound if user interaction occurred
-            if (userInteractionOccurred) {
-                audio.play().catch((error) => {
-                    console.error('Error playing sound:', error);
-                });
-            }
-
-            showPopup(result.data); // Show the QR code content in the popup
+        if (videoElem && 'disablePictureInPicture' in videoElem) {
+            videoElem.disablePictureInPicture = true;
         }
-    },
-    {
-        returnDetailedScanResult: true, // Switch to the new API for future compatibility
-        // Explicitly set the worker path
-        workerPath: 'https://unpkg.com/qr-scanner/qr-scanner-worker.min.js'
-    }
-);
 
-// Start the scanner
-qrScanner.start().catch(err => {
-    console.error("Error starting QR scanner:", err);
-});
+        const qrScanner = new QrScanner(
+            videoElem,
+            result => {
+                if (scanning) {
+                    scanning = false;
+                    qrScanner.stop();
+                    if (userInteractionOccurred) {
+                        audio.play().catch((error) => {
+                            console.error('Error playing sound:', error);
+                        });
+                    }
+                    showPopup(result.data);
+                }
+            },
+            { returnDetailedScanResult: true }
+        );
+
+        qrScanner.start().catch(err => {
+            console.error("Error starting QR scanner:", err);
+        });
+    } catch (error) {
+        console.error('Failed to initialize QR Scanner:', error);
+    }
+}
+// Call the initialization function when the page loads
+document.addEventListener('DOMContentLoaded', initializeScanner);
 
 function showPopup(qrContent) {
     const popup = document.getElementById('qr-popup');
