@@ -29,23 +29,29 @@ if (videoElem && 'disablePictureInPicture' in videoElem) {
     videoElem.disablePictureInPicture = true; // Prevents picture-in-picture mode
 }
 
-const qrScanner = new QrScanner(videoElem, result => {
-    if (scanning) {
-        scanning = false;
-        qrScanner.stop(); // Stop the scanner after QR is detected
+const qrScanner = new QrScanner(
+    videoElem,
+    result => {
+        if (scanning) {
+            scanning = false;
+            qrScanner.stop(); // Stop the scanner after QR is detected
 
-        // Play sound if user interaction occurred
-        if (userInteractionOccurred) {
-            audio.play().catch((error) => {
-                console.error('Error playing sound:', error);
-            });
+            // Play sound if user interaction occurred
+            if (userInteractionOccurred) {
+                audio.play().catch((error) => {
+                    console.error('Error playing sound:', error);
+                });
+            }
+
+            showPopup(result.data); // Show the QR code content in the popup
         }
-
-        showPopup(result.data); // Show the QR code content in the popup
+    },
+    {
+        returnDetailedScanResult: true, // Switch to the new API for future compatibility
+        // Explicitly set the worker path
+        workerPath: 'https://unpkg.com/qr-scanner/qr-scanner-worker.min.js'
     }
-}, {
-    returnDetailedScanResult: true // Switch to the new API for future compatibility
-});
+);
 
 // Start the scanner
 qrScanner.start().catch(err => {
