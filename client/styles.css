@@ -193,6 +193,9 @@ button:active {
 /* Main content and hamburger icon adjustment */
 .main-content {
     padding: 20px;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
 }
 
 .hamburger-icon {
@@ -220,14 +223,13 @@ button:active {
     background: rgba(200, 200, 200, 0.5); /* Light grey transparent */
     z-index: 999; /* Make sure it's on top */
 }
-div#reader div {
-    z-index: 0 !important;
-}
+
 #scanner-container {
-    height: 100vh;
-    width: 100vw;
+    height: 87vh;
+    width: 90vw;
     overflow: hidden;
     position: relative;
+    margin-top: 70px;
 }
 .main-content {
     padding: 20px;
@@ -255,7 +257,7 @@ div#reader div {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) !important;
     object-fit: cover;
 }
 
