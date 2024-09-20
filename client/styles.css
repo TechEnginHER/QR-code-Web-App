@@ -193,9 +193,6 @@ button:active {
 /* Main content and hamburger icon adjustment */
 .main-content {
     padding: 20px;
-    height: 100vh;
-    width: 100vw;
-    position: relative;
 }
 
 .hamburger-icon {
@@ -230,10 +227,6 @@ button:active {
     overflow: hidden;
     position: relative;
     margin-top: 70px;
-}
-.main-content {
-    padding: 20px;
-
 }
 .main-contents {
     padding: 20px;
@@ -386,28 +379,6 @@ button#save-clue-btn{
     cursor: pointer;
 }
 
-/* Initially hide the delete button */
-.delete-btn {
-    display: none;
-    position: absolute;
-    top: 39%;
-    right: 27px;
-    transform: translateY(-50%);
-    background-color: #e83838;
-    color: #fff;
-    border: none;
-    padding: 10px 10px;
-    cursor: pointer;
-    font-family: Arial, sans-serif;
-    width: 30%;
-    line-height: 1.5;
-    font-weight: 600;
-}
-
-/* Show delete button when the item is clicked */
-.clue-item.show-delete .delete-btn {
-    display: block;
-}
 /* Spinner Overlay */
 .spinner-overlay {
     position: fixed;
@@ -427,8 +398,8 @@ button#save-clue-btn{
     border: 8px solid rgba(255, 255, 255, 0.3);
     border-top: 8px solid #fff;
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     animation: spin 1s linear infinite;
 }
 
