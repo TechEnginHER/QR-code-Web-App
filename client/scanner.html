@@ -22,7 +22,7 @@
     <div class="main-contents">
         <div class="hamburger-icon" id="hamburgerIcon">&#9776;</div>
         <div id="scanner-container">
-           <div id="reader"></div>
+            <video id="scanner-video" muted playsinline></video>
         </div>
     </div>
 
@@ -33,8 +33,7 @@
             <button id="save-clue-btn">Save Clue</button>
         </div>
     </div>
-
-    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script src="https://unpkg.com/qr-scanner/qr-scanner.umd.min.js"></script>
     <script src="scanner.js"></script>
     <script src="script.js"></script>
 </body>

@@ -1,16 +1,14 @@
-const backendURL = 'https://qrcodescavengerhuntwebapp.onrender.com'; //Render backend URL
+const backendURL = 'https://qrcodescavengerhuntwebapp.onrender.com'; // Render backend URL
 
-const html5QrCode = new Html5Qrcode("reader");
+// Initialize the audio
+const audio = new Audio('client/330046__paulmorek__beep-03-positive.mp3'); // Path to your sound file
 let scanning = true;
-
-const audio = new Audio('client/330046__paulmorek__beep-03-positive.mp3'); //  path to your sound file
 
 // Flag to check if user interaction has occurred
 let userInteractionOccurred = false;
 
 // Allow audio playback on user interaction
 document.querySelector('.scan-qr-btn').addEventListener('click', () => {
-    // Try playing the sound in a muted way
     audio.muted = true;
     audio.play().then(() => {
         // If playback succeeds, mark user interaction
@@ -23,41 +21,27 @@ document.querySelector('.scan-qr-btn').addEventListener('click', () => {
     });
 });
 
-const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+// Initialize the QrScanner from the qr-scanner library
+const videoElem = document.getElementById('reader');
+const qrScanner = new QrScanner(videoElem, result => {
     if (scanning) {
         scanning = false;
-        html5QrCode.pause();
+        qrScanner.stop(); // Stop the scanner after QR is detected
+
+        // Play sound if user interaction occurred
         if (userInteractionOccurred) {
             audio.play().catch((error) => {
                 console.error('Error playing sound:', error);
             });
         }
-        showPopup(decodedText);
+
+        showPopup(result); // Show the QR code content in the popup
     }
-};
-const width = Math.min(window.innerWidth, window.innerHeight) * 0.7;
-const height = width; // square for better compatibility
+});
 
-const config = { 
-    fps: 10,
-    qrbox: { width: width, height: height },
-    aspectRatio: 1.0, // Use a square aspect ratio
-    rememberLastUsedCamera: true
-};
-
-html5QrCode.start(
-    { facingMode: "environment" }, 
-    config, 
-    qrCodeSuccessCallback
-).catch((err) => {
+// Start the scanner
+qrScanner.start().catch(err => {
     console.error("Error starting QR scanner:", err);
-    // Fallback to a more permissive configuration
-    const fallbackConfig = { 
-        fps: 10,
-        qrbox: { width: 250, height: 250 },
-        rememberLastUsedCamera: true
-    };
-    return html5QrCode.start({ facingMode: "environment" }, fallbackConfig, qrCodeSuccessCallback);
 });
 
 function showPopup(qrContent) {
@@ -88,7 +72,7 @@ function closePopup() {
 
 function resumeScanning() {
     scanning = true;
-    html5QrCode.resume();
+    qrScanner.start(); // Resume the scanner
 }
 
 async function saveClue(clue) {
