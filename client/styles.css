@@ -315,7 +315,8 @@ button:active {
     margin-top: 0;
 }
 #qr-info{
-    width: 70vw;
+    font-size: 1.0em;
+    line-height: 1.4;
 }
 button#save-clue-btn{
     background-color: #2c140c;
