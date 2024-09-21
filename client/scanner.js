@@ -37,7 +37,7 @@ function preloadImagePlaceholders() {
     clues.forEach(clue => {
         const img = document.createElement('img');
         img.classList.add('lazy-load');
-        img.dataset.src = clue.path; // Set data-src for lazy loading
+        //img.dataset.src = clue.path; // Set data-src for lazy loading
         img.src = 'client/placeholder.png'; // Placeholder image
         document.body.appendChild(img); // Add the placeholder to the DOM
     });
