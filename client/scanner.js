@@ -141,10 +141,12 @@ function showPopup(qrContent) {
 
 function closePopup() {
     document.getElementById('qr-popup').style.display = 'none';
-    document.getElementById('video-clue').style.display = 'none';
+    let videoClue = document.getElementById('video-clue')
+    if (videoClue){
+        videoClue.style.display = 'none';
     resumeScanning();
+    }
 }
-
 function resumeScanning() {
     scanning = true;
     qrScanner?.start().catch(err => console.error("Error resuming QR scanner:", err));

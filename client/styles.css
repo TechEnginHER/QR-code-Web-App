@@ -422,6 +422,10 @@ button#save-clue-btn{
     body{
         max-width: 440px;
         margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
     html{
         background-color: #ddd;
