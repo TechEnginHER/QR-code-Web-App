@@ -94,6 +94,7 @@ function showPopup(qrContent) {
 
     if (clueMap.has(qrContent)) {
         const clueImage = clueMap.get(qrContent);
+        console.log(clueImage)
         qrInfo.src = clueImage; // Load image when needed
         qrInfo.onerror = () => {
             qrInfo.src = '/api/placeholder/400/300';
