@@ -335,9 +335,18 @@ button#save-clue-btn{
     margin-top: 25px;
     transition: background-color 0.3s ease;
 }
+.main-content h1{
+    text-align: center;
+    font-size: 1.5rem;
+    margin-left: 25px;
+}
+#clues-container{
+    display: flex;
+    flex-direction: column;
+}
 #clues-list li{
     line-height: 1.6;
-    padding: 10px;
+    padding: 10px 0;
     font-size: 1.2em;
     text-decoration: none;
     border-top: 1px solid #a87255;
@@ -350,7 +359,9 @@ button#save-clue-btn{
     padding-inline-start: 0;
     margin-bottom: 45px;
 }
-
+.center-button{
+    text-align: center;
+}
 .btn {
     display: inline-block;
     padding: 10px 20px;
