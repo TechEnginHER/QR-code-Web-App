@@ -1,18 +1,16 @@
-const backendURL = 'https://qrcodescavengerhuntwebapp.onrender.com'; //Render backend URL
+const backendURL = 'https://qrcodescavengerhuntwebapp.onrender.com'; // Render backend URL
 
 document.addEventListener('DOMContentLoaded', displaySavedClues);
 
-const audio = new Audio('330046__paulmorek__beep-03-positive.wav'); //  path to your sound file
+const audio = new Audio('330046__paulmorek__beep-03-positive.wav'); // path to your sound file
 
 // Flag to check if user interaction has occurred
 let userInteractionOccurred = false;
 
 // Allow audio playback on user interaction
 document.querySelector('.scan-qr-btn').addEventListener('click', () => {
-    // Try playing the sound in a muted way
     audio.muted = true;
     audio.play().then(() => {
-        // If playback succeeds, mark user interaction
         userInteractionOccurred = true;
         audio.pause();
         audio.muted = false;
@@ -24,10 +22,8 @@ document.querySelector('.scan-qr-btn').addEventListener('click', () => {
 
 // Allow audio playback on user interaction
 document.querySelector('#find-clues-btn').addEventListener('click', () => {
-    // Try playing the sound in a muted way
     audio.muted = true;
     audio.play().then(() => {
-        // If playback succeeds, mark user interaction
         userInteractionOccurred = true;
         audio.pause();
         audio.muted = false;
@@ -59,9 +55,17 @@ async function displaySavedClues() {
             clues.forEach((clue, index) => {
                 const li = document.createElement('li');
                 li.classList.add('clue-item'); // Add a class for the clue item
-                li.innerHTML = `
-                    Clue ${index + 1}: ${clue.text}
-                `;
+                
+                // Create an image element for each clue
+                const img = document.createElement('img');
+                img.src = clue.imagePath || '/api/placeholder/400/300'; // Use the actual image path or a placeholder
+                img.alt = `Clue ${index + 1}`;
+                img.classList.add('clue-image');
+                img.onerror = () => {
+                    img.src = '/api/placeholder/400/300'; // Fallback to placeholder image if the image can't load
+                };
+
+                li.appendChild(img);
                 cluesList.appendChild(li);
             });
         }
@@ -71,4 +75,3 @@ async function displaySavedClues() {
         cluesList.innerHTML = '<p>Erreur de chargement des indices. Veuillez réessayer plus tard..</p>';
     }
 }
-
