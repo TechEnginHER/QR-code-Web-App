@@ -15,16 +15,38 @@ const clues = [
 // Create a Map for faster lookups
 const clueMap = new Map(clues.map(clue => [clue.id, clue.path]));
 
-// Preload images
-function preloadImages() {
-    clues.forEach(clue => {
-        const img = new Image();
-        img.src = clue.path;
+// Preload images using lazy loading
+function lazyLoadImages() {
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src; // Load the image only when in view
+                observer.unobserve(img); // Stop observing once the image is loaded
+            }
+        });
+    });
+
+    document.querySelectorAll('.lazy-load').forEach(image => {
+        observer.observe(image);
     });
 }
+
+// Preload image placeholders to reserve space
+function preloadImagePlaceholders() {
+    clues.forEach(clue => {
+        const img = document.createElement('img');
+        img.classList.add('lazy-load');
+        img.dataset.src = clue.path; // Set data-src for lazy loading
+        img.src = 'client/placeholder.png'; // Placeholder image
+        document.body.appendChild(img); // Add the placeholder to the DOM
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     initializeScanner();
-    preloadImages();
+    preloadImagePlaceholders(); // Initialize placeholders first
+    lazyLoadImages(); // Set up lazy loading
     updateTeamName();
 });
 
@@ -71,7 +93,8 @@ function showPopup(qrContent) {
     const saveButton = document.getElementById('save-clue-btn');
 
     if (clueMap.has(qrContent)) {
-        qrInfo.src = clueMap.get(qrContent);
+        const clueImage = clueMap.get(qrContent);
+        qrInfo.src = clueImage; // Load image when needed
         qrInfo.onerror = () => {
             qrInfo.src = '/api/placeholder/400/300';
             console.error('Failed to load clue image');
