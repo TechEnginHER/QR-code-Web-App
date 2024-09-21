@@ -58,7 +58,7 @@ async function displaySavedClues() {
                 
                 // Create an image element for each clue
                 const img = document.createElement('img');
-                img.src = clue.imagePath || '/api/placeholder/400/300'; // Use the actual image path or a placeholder
+                img.src = clue.imagePath; // Use the actual image path or a placeholder
                 img.alt = `Clue ${index + 1}`;
                 img.classList.add('clue-image');
                 img.onerror = () => {
