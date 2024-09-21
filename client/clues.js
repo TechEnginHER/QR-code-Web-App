@@ -58,13 +58,7 @@ async function displaySavedClues() {
                 img.onerror = () => {
                     img.src = '/api/placeholder/400/300';
                 };
-
-                const clueText = document.createElement('p');
-                clueText.textContent = `Indice ${index + 1}: ${clue.text}`;
-                clueText.classList.add('clue-text');
-
                 li.appendChild(img);
-                li.appendChild(clueText);
                 cluesList.appendChild(li);
             });
         }

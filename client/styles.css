@@ -345,20 +345,12 @@ button#save-clue-btn{
 }
 
 #clues-list{
-    margin: 80px 5px;
+    margin: 0;
     list-style-type: none;
     padding-inline-start: 0;
-    margin-left: 15px;
     margin-bottom: 45px;
+}
 
-}
-#clues-list p{
-    text-align: center;
-    font-size: 1.4em;
-}
-#clues-list div{
-    text-align: center;
-}
 .btn {
     display: inline-block;
     padding: 10px 20px;
@@ -373,7 +365,9 @@ button#save-clue-btn{
 .btn:hover {
     background-color: #96664c;
 }
-
+.clue-item img{
+    width: -webkit-fill-available;
+}
 /* Style for the items */
 .item {
     position: relative;
@@ -382,7 +376,6 @@ button#save-clue-btn{
     margin: 10px 0;
     cursor: pointer;
 }
-
 /* Spinner Overlay */
 .spinner-overlay {
     position: fixed;
