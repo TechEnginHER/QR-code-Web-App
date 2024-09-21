@@ -1,5 +1,13 @@
 const backendURL = 'https://qrcodescavengerhuntwebapp.onrender.com';
 
+// Mapping between clue texts and image paths
+const clueImageMap = new Map([
+    ['clue1', 'images/clue1.png'],
+    ['clue2', 'images/clue2.png'],
+    ['clue3', 'images/clue3.png'],
+    // Add more mappings as needed
+]);
+
 document.addEventListener('DOMContentLoaded', displaySavedClues);
 
 const audio = new Audio('330046__paulmorek__beep-03-positive.wav');
@@ -44,7 +52,7 @@ async function displaySavedClues() {
                 li.classList.add('clue-item');
                 
                 const img = document.createElement('img');
-                img.src = clue.imagePath || '/api/placeholder/400/300';
+                img.src = clueImageMap.get(clue.text) || '/api/placeholder/400/300';
                 img.alt = `Clue ${index + 1}`;
                 img.classList.add('clue-image');
                 img.onerror = () => {

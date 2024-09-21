@@ -41,11 +41,10 @@ const teamSchema = new mongoose.Schema({
 
 const Team = mongoose.model('Team', teamSchema);
 
-// Define the Clue schema and model, with an added field for image path
+// Define the Clue schema and model
 const clueSchema = new mongoose.Schema({
     text: String,
     teamName: String,
-    imagePath: String,  // New field for image path
 });
 
 const Clue = mongoose.model('Clue', clueSchema);
@@ -114,9 +113,9 @@ app.post('/teams/login', async (req, res) => {
     }
 });
 
-// Route to save a new clue with an image path
+// Route to save a new clue
 app.post('/clues', async (req, res) => {
-    const { text, teamName, imagePath } = req.body;
+    const { text, teamName } = req.body;
 
     try {
         // Check if the clue already exists for the team
@@ -125,8 +124,8 @@ app.post('/clues', async (req, res) => {
             return res.status(400).json({ message: 'Clue already saved' });
         }
 
-        // Save the new clue with the image path
-        const clue = new Clue({ text, teamName, imagePath });
+        // Save the new clue
+        const clue = new Clue({ text, teamName });
         await clue.save();
         res.status(201).json(clue);
     } catch (error) {
@@ -140,7 +139,7 @@ app.get('/clues/:teamName', async (req, res) => {
     const { teamName } = req.params;
     try {
         const clues = await Clue.find({ teamName });
-        res.json(clues);  // The response will now include imagePath
+        res.json(clues);
     } catch (error) {
         console.error('Error getting clues:', error);
         res.status(500).json({ message: 'Server error' });
