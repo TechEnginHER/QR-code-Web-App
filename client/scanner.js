@@ -16,7 +16,7 @@ const clues = [
     ['clue9', 'images/clue9.png'],
     ['clue10', 'images/clue10.png'],
     ['clue11', 'images/clue11.png'],
-    ['clueVideo', {type: 'video' , path:'images/clueVideo.mp4', text: 'Le 4ème et dernier personnage louche envoyait des signaux lumineux très bizarres pendant pratiquement 8 minutes. Je l’ai filmé à son insu. Défi d’équipe 3: en marchant vers le prochain indice, chacun indique aux autres quel sport il a déjà fait avec (ou contre) Claire, et si elle a été mauvaise joueuse en cas de défaite'}],
+    ['clueVideo', {type: 'video' , path:'images/clueVideo.mp4', text: 'Le 4ème et dernier personnage louche envoyait des signaux lumineux très bizarres pendant pratiquement 8 minutes. Je l’ai filmé à son insu.'}],
     ['clueGif', { type: 'gif', path: 'images/clueGif.gif', text: 'Nope!' }],
 ];
 
@@ -112,23 +112,32 @@ function showPopup(qrContent) {
     if (clueMap.has(qrContent)) {
         const clueData = clueMap.get(qrContent);       
             if (typeof clueData === 'string') 
-                { qrInfo.innerHTML = `<video src="${clueData}" style="width: 90vw" controls></video>`;}                
-        
+                {   // Handle image
+                    qrInfo.innerHTML = `<img src="${clueData}" alt="Clue" style="width: 90vw">`;
+                }
+
             else if (typeof clueData === 'object' && clueData.type === 'gif') 
                 {   // Handle GIF with additional text
-                qrInfo.innerHTML = `
-                 <p style="font-size: 2em; font-weight: 700">${clueData.text}</p>
-                <img src="${clueData.path}" alt="GIF Clue" id = "qr-info-img" style="width: 90vw>`;
-                 } 
+                    qrInfo.innerHTML = `
+                    <p style="font-size: 2em; font-weight: 700">${clueData.text}</p>
+                    <img src="${clueData.path}" alt="GIF Clue" id = "qr-info-img" style="width: 90vw>`;
+                } 
             else 
-                 {qrInfo.innerHTML = `<img src="${clueData}" alt="Clue" style="width: 90vw">`;}         
+                 {  // Handle video with additional text
+                    <p style="font-size: 1.2em; font-weight: 700">${clueData.text}</p>
+                    qrInfo.innerHTML = `<video src="${clueData}" style="width: 90vw" controls></video>`;
+                    popup.innerHTML += `<p>
+                                Défi d’équipe 3: en marchant vers le prochain indice, chacun indique aux 
+                                autres quel sport il a déjà fait avec (ou contre) Claire, et si elle a été
+                                 mauvaise joueuse en cas de défaite' 
+                            </p>`     
+                }  
         popup.style.display = 'flex';
         saveButton.onclick = () => saveClue(qrContent);    
     } else {
         showMessage('Indice inconnu');
         resumeScanning();
 }};
-
 
 function closePopup() {
     document.getElementById('qr-popup').style.display = 'none';
