@@ -37,7 +37,7 @@ function preloadImagePlaceholders() {
     clues.forEach(clue => {
         const img = document.createElement('img');
         img.classList.add('lazy-load');
-        //img.dataset.src = clue.path; // Set data-src for lazy loading
+        img.dataset.src = clue.path; // Set data-src for lazy loading
         img.src = 'client/placeholder.png'; // Placeholder image
         document.body.appendChild(img); // Add the placeholder to the DOM
     });
@@ -94,7 +94,6 @@ function showPopup(qrContent) {
 
     if (clueMap.has(qrContent)) {
         const clueImage = clueMap.get(qrContent);
-        console.log(clueImage)
         qrInfo.src = clueImage; // Load image when needed
         qrInfo.onerror = () => {
             qrInfo.src = '/api/placeholder/400/300';
@@ -120,11 +119,12 @@ function resumeScanning() {
 
 async function saveClue(clueId) {
     const teamName = sessionStorage.getItem('teamName');
+    const imagePath = clueMap.get(clueId); // Get the image path from the Map
     try {
         const response = await fetch(`${backendURL}/clues`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ text: clueId, teamName })
+            body: JSON.stringify({ text: clueId, teamName, imagePath }) // Include imagePath in the request
         });
         
         if (response.status === 201) {

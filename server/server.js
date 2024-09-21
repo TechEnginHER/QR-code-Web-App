@@ -33,7 +33,6 @@ app.use((req, res, next) => {
     next();
 });
 
-// API routes
 // Define the Team schema and model
 const teamSchema = new mongoose.Schema({
     name: { type: String, unique: true, required: true },
@@ -117,7 +116,7 @@ app.post('/teams/login', async (req, res) => {
 
 // Route to save a new clue with an image path
 app.post('/clues', async (req, res) => {
-    const { text, teamName, imagePath } = req.body;  // Include imagePath in the request body
+    const { text, teamName, imagePath } = req.body;
 
     try {
         // Check if the clue already exists for the team

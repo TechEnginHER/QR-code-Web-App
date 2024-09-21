@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Hamburger Menu (only visible on pages other than index.html) -->
     <div class="hamburger-menu" id="hamburgerMenu">
         <div class="menu-content" id="menuContent">
             <h2 id="teamName"></h2>
@@ -19,15 +18,15 @@
             <span class="close" id="closeMenu">&times;</span>
         </div>
     </div>
-    <!-- Main Content -->
     <div class="main-content">
         <div class="hamburger-icon" id="hamburgerIcon">
             &#9776;
         </div>
+        <h1>Indices sauvegardés</h1>
         <div id="clues-container">
-            <ul id="clues-list"></ul>
+            <ul id="clues-list" class="clues-grid"></ul>
         </div>
-        <div style="text-align: center;">
+        <div class="center-button">
             <a href="scanner.html" class="btn" id="find-clues-btn">Trouvez plus d'indices</a>
         </div>
     </div>
@@ -35,7 +34,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
