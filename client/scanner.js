@@ -99,11 +99,11 @@ function handleScan(result) {
         qrScanner.stop();
         if (userInteractionOccurred) {
             audio.play().catch(error => console.error('Error playing sound:', error));
-        }
+        }else
+            audio.play().catch(error => console.error('Error playing sound:', error));
         showPopup(result.data);
     }
 }
-
 function showPopup(qrContent) {
     const popup = document.getElementById('qr-popup');
     const qrInfo = document.getElementById('qr-info');

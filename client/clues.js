@@ -23,30 +23,29 @@ async function displaySavedClues() {
                 const li = document.createElement('li');
                 li.classList.add('clue-item');
                 
-                switch (clue.mediaType) {
-                    case 'null':
-                        li.innerHTML = `
-                            <img src="${clue.imagePath}" alt="Clue ${index + 1}">
-                            ${clue.additionalText ? `<p>${clue.additionalText}</p>` : ''}
-                        `;                        
-                        break;
-                    case 'gif':
-                        li.innerHTML = `
-                            ${clue.additionalText ? `<p>${clue.additionalText}</p>` : ''}
-                            <img src="${clue.imagePath}" alt="GIF Clue ${index + 1}">   
+                if (clue.mediaType === 'video') {                    
+                    li.innerHTML = `
+                        ${clue.additionalText ? `<p>${clue.additionalText}</p>` : ''}
+                        <video src="${clue.imagePath}" controls style="width: 90vw"></video>
                         `;
-                        break;
-                    default:
-                        li.innerHTML = `
-                                        ${clue.additionalText ? `<p>${clue.additionalText}</p>` : ''}
-                                         <video src="${clue.imagePath}" controls></video>                            
-                                        `
-                        li.innerHTML += `<p>Défi d’équipe 3: en marchant vers le prochain indice, chacun indique aux 
-                                            autres quel sport il a déjà fait avec (ou contre) Claire, et si elle a été
-                                            mauvaise joueuse en cas de défaite </p>`
-                        console.log("this is a video");         
-                }
-                
+                    li.innerHTML += `
+                        <p>Défi d’équipe 3: en marchant vers le prochain indice, chacun indique aux 
+                        autres quel sport il a déjà fait avec (ou contre) Claire, et si elle a été
+                        mauvaise joueuse en cas de défaite</p>
+                    `;
+                    console.log("this is a video");
+                } else if (clue.mediaType === 'gif') {
+                    li.innerHTML = `
+                        ${clue.additionalText ? `<p>${clue.additionalText}</p>` : ''}
+                        <img src="${clue.imagePath}" alt="GIF Clue ${index + 1}">
+                    `;
+                } else {
+                    li.innerHTML = `
+                        <img src="${clue.imagePath}" alt="Clue ${index + 1}">
+                        ${clue.additionalText ? `<p>${clue.additionalText}</p>` : ''}
+                    `;
+                    console.log("this is a video");
+                }                     
                 cluesList.appendChild(li);
             });
         }
