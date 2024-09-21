@@ -115,21 +115,21 @@ function showPopup(qrContent) {
                 {   // Handle image
                     qrInfo.innerHTML = `<img src="${clueData}" alt="Clue" style="width: 90vw">`;
                 }
-
             else if (typeof clueData === 'object' && clueData.type === 'gif') 
                 {   // Handle GIF with additional text
-                    qrInfo.innerHTML = `<p style="font-size: 2em; font-weight: 700">${clueData.text}</p>`
+                    qrInfo.innerHTML = `<p style="font-size: 2em; font-weight: 700">${clueData.text}</p>`;
                     qrInfo.innerHTML += `<img src="${clueData.path}" alt="GIF Clue" id = "qr-info-img" style="width: 90vw>`;
                 } 
             else 
                  {  // Handle video with additional text
                     qrInfo.innerHTML = `<h2>Indice No. 5</h2>`
-                    qrInfo.innerHTML += `<p style="font-size: 1.2em; font-weight: 700"> ${clueData.text}</p>`
+                    qrInfo.innerHTML += `<p style="font-size: 1.2em; font-weight: 700; text-align: justify; line-height: 1.4;
+                                            padding: 0 8px"> ${clueData.text}</p>`;
                     qrInfo.innerHTML += `<video src="${clueData.path}" style="width: 90vw" controls></video>`;
-                    qrInfo.innerHTML += `<p>
+                    qrInfo.innerHTML += `<p style="font-size:1.4em; line-height: 1.4; padding: 0 8px; text-align: justify>
                                             Défi d’équipe 3: en marchant vers le prochain indice, chacun indique aux 
                                             autres quel sport il a déjà fait avec (ou contre) Claire, et si elle a été
-                                            mauvaise joueuse en cas de défaite' 
+                                            mauvaise joueuse en cas de défaite 
                                          </p>`     
                 }  
         popup.style.display = 'flex';

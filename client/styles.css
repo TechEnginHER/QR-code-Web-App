@@ -378,7 +378,7 @@ button#save-clue-btn{
     background-color: #96664c;
 }
 .clue-item img{
-    width: -webkit-fill-available;
+    width: 90vw;
 }
 /* Style for the items */
 .item {

@@ -24,23 +24,27 @@ async function displaySavedClues() {
                 li.classList.add('clue-item');
                 
                 switch (clue.mediaType) {
-                    case 'video':
-                        li.innerHTML = `
-                            <video src="${clue.imagePath}" controls></video>
-                            ${clue.additionalText ? `<p>${clue.additionalText}</p>` : ''}
-                        `;
-                        break;
-                    case 'gif':
-                        li.innerHTML = `
-                            <img src="${clue.imagePath}" alt="GIF Clue ${index + 1}">
-                            ${clue.additionalText ? `<p>${clue.additionalText}</p>` : ''}
-                        `;
-                        break;
-                    default: // image
+                    case 'null':
                         li.innerHTML = `
                             <img src="${clue.imagePath}" alt="Clue ${index + 1}">
                             ${clue.additionalText ? `<p>${clue.additionalText}</p>` : ''}
+                        `;                        
+                        break;
+                    case 'gif':
+                        li.innerHTML = `
+                            ${clue.additionalText ? `<p>${clue.additionalText}</p>` : ''}
+                            <img src="${clue.imagePath}" alt="GIF Clue ${index + 1}">   
                         `;
+                        break;
+                    default:
+                        li.innerHTML = `
+                                        ${clue.additionalText ? `<p>${clue.additionalText}</p>` : ''}
+                                         <video src="${clue.imagePath}" controls></video>                            
+                                        `
+                        li.innerHTML += `<p>Défi d’équipe 3: en marchant vers le prochain indice, chacun indique aux 
+                                            autres quel sport il a déjà fait avec (ou contre) Claire, et si elle a été
+                                            mauvaise joueuse en cas de défaite </p>`
+                        console.log("this is a video");         
                 }
                 
                 cluesList.appendChild(li);
@@ -60,7 +64,7 @@ function updateTeamName() {
         teamNameElement.textContent = teamName ? `Équipe: ${teamName}` : 'Équipe: Inconnue';
     }
 }
-document.getElementById('first-scan').addEventListener('click', handleUserInteraction);
+document.addEventListener('DOMContentLoaded', handleUserInteraction);
 function handleUserInteraction() {
     let userInteractionOccurred = false;
     const audio = new Audio('330046__paulmorek__beep-03-positive.mp3');
