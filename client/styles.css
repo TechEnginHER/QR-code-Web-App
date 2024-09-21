@@ -5,7 +5,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     position: relative;
-    height: 99.9vh;
+   /* height: 99.9vh;*/
 }
 
 /* Hero section styles */

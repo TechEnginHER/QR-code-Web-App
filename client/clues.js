@@ -10,7 +10,7 @@ const clueImageMap = new Map([
 
 document.addEventListener('DOMContentLoaded', displaySavedClues);
 
-const audio = new Audio('330046__paulmorek__beep-03-positive.wav');
+
 
 let userInteractionOccurred = false;
 
@@ -18,6 +18,7 @@ document.querySelector('.scan-qr-btn').addEventListener('click', handleUserInter
 document.querySelector('#find-clues-btn').addEventListener('click', handleUserInteraction);
 
 function handleUserInteraction() {
+    const audio = new Audio('330046__paulmorek__beep-03-positive.mp3');
     audio.muted = true;
     audio.play().then(() => {
         userInteractionOccurred = true;
