@@ -109,7 +109,7 @@ function showPopup(qrContent) {
     
     if (clueMap.has(qrContent)) {
         const clue = clueMap.get(qrContent);
-        
+        console.log (clue)
         // Check if it's a video
         if (clue.endsWith('.mp4')) {
             qrInfo.innerHTML = `<video controls>
