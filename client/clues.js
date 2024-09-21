@@ -11,7 +11,7 @@ async function displaySavedClues() {
 
         if (clues.length === 0) {
             cluesList.innerHTML = `
-                <p style="text-align: center;">Tu n'as pas encore trouvé d'indices!</p>
+                <p style="text-align: center; font-size: 1.3em">Tu n'as pas encore trouvé d'indices!</p>
                 <div style="text-align: center;">
                     <a href="scanner.html" class="btn" id="first-scan">Scannez un QR</a>
                 </div>

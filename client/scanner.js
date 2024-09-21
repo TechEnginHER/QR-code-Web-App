@@ -141,11 +141,7 @@ function showPopup(qrContent) {
 
 function closePopup() {
     document.getElementById('qr-popup').style.display = 'none';
-    let videoClue = document.getElementById('video-clue')
-    if (videoClue){
-        videoClue.style.display = 'none';
-    }
-         resumeScanning();
+    resumeScanning();   
 }
 
 function resumeScanning() {
