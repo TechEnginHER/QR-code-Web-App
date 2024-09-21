@@ -5,7 +5,15 @@ const clueImageMap = new Map([
     ['clue1', 'images/clue1.png'],
     ['clue2', 'images/clue2.png'],
     ['clue3', 'images/clue3.png'],
-    // Add more mappings as needed
+    ['clue4', 'images/clue4.png'],
+    ['clue6', 'images/clue6.png'],
+    ['clue7', 'images/clue7.png'],
+    ['clue8', 'images/clue8.png'],
+    ['clue9', 'images/clue9.png'],
+    ['clue10', 'images/clue10.png'],
+    ['clue11', 'images/clue11.png'],
+    ['clueVideo', 'images/clueVideo.mp4'], // Video clue
+    ['clueGif', 'images/clueGif.gif'], // GIF clue
 ]);
 
 document.addEventListener('DOMContentLoaded', displaySavedClues);
@@ -14,7 +22,7 @@ document.addEventListener('DOMContentLoaded', displaySavedClues);
 
 let userInteractionOccurred = false;
 
-document.querySelector('.scan-qr-btn').addEventListener('click', handleUserInteraction);
+document.querySelectorAll('.scan-qr-btn').addEventListener('click', handleUserInteraction);
 document.querySelector('#find-clues-btn').addEventListener('click', handleUserInteraction);
 
 function handleUserInteraction() {
@@ -40,8 +48,8 @@ async function displaySavedClues() {
 
         if (clues.length === 0) {
             cluesList.innerHTML = `
-                <p>Tu n'as pas encore trouvé d'indices!</p>
-                <div>
+                <p style="text-align: center;">Tu n'as pas encore trouvé d'indices!</p>
+                <div style="text-align: center;">
                     <a href="scanner.html" class="btn">Scannez un QR</a>
                 </div>
             `;

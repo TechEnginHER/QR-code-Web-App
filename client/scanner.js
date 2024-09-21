@@ -6,9 +6,18 @@ let qrScanner = null;
 
 // Efficient data structure for clues
 const clues = [
-    { id: 'clue1', path: 'images/clue1.png' },
-    { id: 'clue2', path: 'images/clue2.png' },
-    { id: 'clue3', path: 'images/clue3.png' },
+    ['clue1', 'images/clue1.png'],
+    ['clue2', 'images/clue2.png'],
+    ['clue3', 'images/clue3.png'],
+    ['clue4', 'images/clue4.png'],
+    ['clue6', 'images/clue6.png'],
+    ['clue7', 'images/clue7.png'],
+    ['clue8', 'images/clue8.png'],
+    ['clue9', 'images/clue9.png'],
+    ['clue10', 'images/clue10.png'],
+    ['clue11', 'images/clue11.png'],
+    ['clueVideo', 'images/clueVideo.mp4'], // Video clue
+    ['clueGif', 'images/clueGif.gif'], // GIF clue
     // Add more clues as needed
 ];
 
@@ -90,16 +99,37 @@ function handleScan(result) {
 
 function showPopup(qrContent) {
     const popup = document.getElementById('qr-popup');
-    const qrInfo = document.getElementById('qr-info');
+    const qrInfo = document.getElementById('qr-info'); // Image or video element
+    const additionalText = document.getElementById('additional-text'); // Text for GIFs
     const saveButton = document.getElementById('save-clue-btn');
-
+    
+    // Reset the popup
+    qrInfo.style.display = 'none';
+    additionalText.style.display = 'none';
+    
     if (clueMap.has(qrContent)) {
-        const clueImage = clueMap.get(qrContent);
-        qrInfo.src = clueImage; // Load image when needed
-        qrInfo.onerror = () => {
-            qrInfo.src = '/api/placeholder/400/300';
-            console.error('Failed to load clue image');
-        };
+        const clue = clueMap.get(qrContent);
+        
+        // Check if it's a video
+        if (clue.endsWith('.mp4')) {
+            qrInfo.innerHTML = `<video controls>
+                                    <source src="${clue}" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>`;
+        }
+        // Check if it's a GIF (and add additional text)
+        else if (clue.endsWith('.gif')) {
+            qrInfo.src = clue; // Display the GIF
+            qrInfo.style.display = 'block'; // Make sure it's visible
+            additionalText.textContent = 'This is the additional text for the GIF';
+            additionalText.style.display = 'block';
+        }
+        // For images (default case)
+        else {
+            qrInfo.src = clue;
+            qrInfo.style.display = 'block';
+        }
+        
         popup.style.display = 'flex';
         saveButton.onclick = () => saveClue(qrContent);
     } else {
@@ -107,6 +137,7 @@ function showPopup(qrContent) {
         resumeScanning();
     }
 }
+
 
 function closePopup() {
     document.getElementById('qr-popup').style.display = 'none';
