@@ -1,28 +1,28 @@
 const backendURL = 'https://qrcodescavengerhuntwebapp.onrender.com';
 
-// Mapping between clue texts and image paths
-const clueImageMap = new Map([
-    ['clue1', 'images/clue1.png'],
-    ['clue2', 'images/clue2.png'],
-    ['clue3', 'images/clue3.png'],
-    ['clue4', 'images/clue4.png'],
-    ['clue6', 'images/clue6.png'],
-    ['clue7', 'images/clue7.png'],
-    ['clue8', 'images/clue8.png'],
-    ['clue9', 'images/clue9.png'],
-    ['clue10', 'images/clue10.png'],
-    ['clue11', 'images/clue11.png'],
-    ['clueVideo', 'images/clueVideo.mp4'], // Video clue
-    ['clueGif', 'images/clueGif.gif'], // GIF clue
+// Updated mapping to include video and GIF
+const clueMediaMap = new Map([
+    ['clue1', { type: 'image', path: 'images/clue1.png' }],
+    ['clue2', { type: 'image', path: 'images/clue2.png' }],
+    ['clue3', { type: 'image', path: 'images/clue3.png' }],
+    ['clue4', { type: 'image', path: 'images/clue4.png' }],
+    ['clue5', { type: 'image', path: 'images/clue5.png' }],
+    ['clue6', { type: 'image', path: 'images/clue6.png' }],
+    ['clue7', { type: 'image', path: 'images/clue7.png' }],
+    ['clue8', { type: 'image', path: 'images/clue8.png' }],
+    ['clue9', { type: 'image', path: 'images/clue9.png' }],
+    ['clue10', { type: 'image', path: 'images/clue10.png' }],
+    ['clue11', { type: 'image', path: 'images/clue11.png' }],
+    ['clue12', { type: 'image', path: 'images/clue12.png' }],
+    ['video_clue', { type: 'video', path: 'videos/video_clue.mp4' }],
+    ['gif_clue', { type: 'gif', path: 'images/gif_clue.gif' }],
 ]);
 
 document.addEventListener('DOMContentLoaded', displaySavedClues);
 
-
-
 let userInteractionOccurred = false;
 
-document.querySelectorAll('.scan-qr-btn').addEventListener('click', handleUserInteraction);
+document.querySelector('.scan-qr-btn').addEventListener('click', handleUserInteraction);
 document.querySelector('#find-clues-btn').addEventListener('click', handleUserInteraction);
 
 function handleUserInteraction() {
@@ -60,14 +60,22 @@ async function displaySavedClues() {
                 const li = document.createElement('li');
                 li.classList.add('clue-item');
                 
-                const img = document.createElement('img');
-                img.src = clueImageMap.get(clue.text) || '/api/placeholder/400/300';
-                img.alt = `Clue ${index + 1}`;
-                img.classList.add('clue-image');
-                img.onerror = () => {
-                    img.src = '/api/placeholder/400/300';
-                };
-                li.appendChild(img);
+                const mediaInfo = clueMediaMap.get(clue.text) || { type: 'image', path: '/api/placeholder/400/300' };
+                
+                switch (mediaInfo.type) {
+                    case 'video':
+                        li.innerHTML = `<video src="${clue.imagePath || mediaInfo.path}" controls></video>`;
+                        break;
+                    case 'gif':
+                        li.innerHTML = `
+                            <img src="${clue.imagePath || mediaInfo.path}" alt="GIF Clue ${index + 1}">
+                            ${clue.additionalText ? `<p>${clue.additionalText}</p>` : ''}
+                        `;
+                        break;
+                    default: // image
+                        li.innerHTML = `<img src="${clue.imagePath || mediaInfo.path}" alt="Clue ${index + 1}">`;
+                }
+                
                 cluesList.appendChild(li);
             });
         }
@@ -77,3 +85,14 @@ async function displaySavedClues() {
         cluesList.innerHTML = '<p>Erreur de chargement des indices. Veuillez réessayer plus tard.</p>';
     }
 }
+
+function updateTeamName() {
+    const teamName = sessionStorage.getItem('teamName');
+    const teamNameElement = document.getElementById('teamName');
+    if (teamNameElement) {
+        teamNameElement.textContent = teamName ? `Équipe: ${teamName}` : 'Équipe: Inconnue';
+    }
+}
+
+// Call updateTeamName when the page loads
+document.addEventListener('DOMContentLoaded', updateTeamName);
