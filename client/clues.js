@@ -20,24 +20,6 @@ const clueMediaMap = new Map([
 
 document.addEventListener('DOMContentLoaded', displaySavedClues);
 
-let userInteractionOccurred = false;
-
-document.querySelector('.scan-qr-btn').addEventListener('click', handleUserInteraction);
-document.querySelector('#find-clues-btn').addEventListener('click', handleUserInteraction);
-
-function handleUserInteraction() {
-    const audio = new Audio('330046__paulmorek__beep-03-positive.mp3');
-    audio.muted = true;
-    audio.play().then(() => {
-        userInteractionOccurred = true;
-        audio.pause();
-        audio.muted = false;
-        console.log('User interaction registered. Ready to play sound on QR detection.');
-    }).catch((error) => {
-        console.error('Error during user interaction:', error);
-    });
-}
-
 async function displaySavedClues() {
     const cluesList = document.getElementById('clues-list');
     const teamName = sessionStorage.getItem('teamName');
@@ -50,7 +32,7 @@ async function displaySavedClues() {
             cluesList.innerHTML = `
                 <p style="text-align: center;">Tu n'as pas encore trouvé d'indices!</p>
                 <div style="text-align: center;">
-                    <a href="scanner.html" class="btn">Scannez un QR</a>
+                    <a href="scanner.html" class="btn" id = "first-scan">Scannez un QR</a>
                 </div>
             `;
             document.getElementById('find-clues-btn').style.display = 'none';
@@ -84,6 +66,21 @@ async function displaySavedClues() {
         console.error('Error fetching clues:', error);
         cluesList.innerHTML = '<p>Erreur de chargement des indices. Veuillez réessayer plus tard.</p>';
     }
+}
+
+document.querySelector('#first-scan').addEventListener('click', handleUserInteraction);
+function handleUserInteraction() {
+    let userInteractionOccurred = false;
+    const audio = new Audio('330046__paulmorek__beep-03-positive.mp3');
+    audio.muted = true;
+    audio.play().then(() => {
+        userInteractionOccurred = true;
+        audio.pause();
+        audio.muted = false;
+        console.log('User interaction registered. Ready to play sound on QR detection.');
+    }).catch((error) => {
+        console.error('Error during user interaction:', error);
+    });
 }
 
 function updateTeamName() {

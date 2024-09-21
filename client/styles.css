@@ -319,7 +319,7 @@ button:active {
 #qr-popup h2 {
     margin-top: 0;
 }
-#qr-info{
+#qr-info-img{
     width: -webkit-fill-available; 
 }
 button#save-clue-btn{

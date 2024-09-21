@@ -10,16 +10,14 @@ const clues = [
     ['clue2', 'images/clue2.png'],
     ['clue3', 'images/clue3.png'],
     ['clue4', 'images/clue4.png'],
-    ['clue5', 'images/clue5.png'],
     ['clue6', 'images/clue6.png'],
     ['clue7', 'images/clue7.png'],
     ['clue8', 'images/clue8.png'],
     ['clue9', 'images/clue9.png'],
     ['clue10', 'images/clue10.png'],
     ['clue11', 'images/clue11.png'],
-    ['clue12', 'images/clue12.png'],
-    ['video_clue', 'videos/video_clue.mp4'],
-    ['gif_clue', { type: 'gif', path: 'images/gif_clue.gif', text: 'Additional text for GIF clue' }],
+    ['clueVideo', 'images/clueVideo.mp4'],
+    ['clueGif', { type: 'gif', path: 'images/clueGif.gif', text: 'Additional text for GIF clue' }],
 ];
 
 // Create a Map for faster lookups
@@ -79,7 +77,6 @@ async function initializeScanner() {
         if (videoElem && 'disablePictureInPicture' in videoElem) {
             videoElem.disablePictureInPicture = true;
         }
-
         qrScanner = new QrScanner(videoElem, handleScan, { returnDetailedScanResult: true });
         await qrScanner.start();
     } catch (error) {
@@ -104,8 +101,7 @@ function showPopup(qrContent) {
     const saveButton = document.getElementById('save-clue-btn');
 
     if (clueMap.has(qrContent)) {
-        const clueData = clueMap.get(qrContent);
-        
+        const clueData = clueMap.get(qrContent);       
         if (typeof clueData === 'string') {
             // Handle image and video
             if (clueData.endsWith('.mp4')) {
@@ -116,11 +112,10 @@ function showPopup(qrContent) {
         } else if (typeof clueData === 'object' && clueData.type === 'gif') {
             // Handle GIF with additional text
             qrInfo.innerHTML = `
-                <img src="${clueData.path}" alt="GIF Clue">
+                <img src="${clueData.path}" alt="GIF Clue" id = "qr-info-img">
                 <p>${clueData.text}</p>
             `;
-        }
-        
+        }       
         popup.style.display = 'flex';
         saveButton.onclick = () => saveClue(qrContent);
     } else {
