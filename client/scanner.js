@@ -1,12 +1,12 @@
 const backendURL = 'https://qrcodescavengerhuntwebapp.onrender.com';
-const audio = new Audio('client/330046__paulmorek__beep-03-positive.mp3');
+const audio = new Audio('330046__paulmorek__beep-03-positive.mp3');
 let scanning = true;
 let userInteractionOccurred = false;
 let qrScanner = null;
 
 // Efficient data structure for clues
 const clues = [
-    { id: 'clue1', path: 'client/images/clue1.png' },
+    { id: 'clue1', path: 'images/clue1.png' },
     { id: 'clue2', path: 'images/clue2.png' },
     { id: 'clue3', path: 'images/clue3.png' },
     // Add more clues as needed
