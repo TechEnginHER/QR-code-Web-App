@@ -144,9 +144,10 @@ function closePopup() {
     let videoClue = document.getElementById('video-clue')
     if (videoClue){
         videoClue.style.display = 'none';
-    resumeScanning();
     }
+         resumeScanning();
 }
+
 function resumeScanning() {
     scanning = true;
     qrScanner?.start().catch(err => console.error("Error resuming QR scanner:", err));
