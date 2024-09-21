@@ -46,7 +46,8 @@ const clueSchema = new mongoose.Schema({
     text: String,
     teamName: String,
     additionalText: String,
-    imagePath: String
+    imagePath: String,
+    mediaType: String // 'image', 'video', or 'gif'
 });
 
 const Clue = mongoose.model('Clue', clueSchema);
@@ -117,7 +118,7 @@ app.post('/teams/login', async (req, res) => {
 
 // Updated route to save a new clue
 app.post('/clues', async (req, res) => {
-    const { text, teamName, additionalText, imagePath } = req.body;
+    const { text, teamName, additionalText, imagePath, mediaType } = req.body;
 
     try {
         // Check if the clue already exists for the team
@@ -126,8 +127,8 @@ app.post('/clues', async (req, res) => {
             return res.status(400).json({ message: 'Clue already saved' });
         }
 
-        // Save the new clue with additionalText and imagePath
-        const clue = new Clue({ text, teamName, additionalText, imagePath });
+        // Save the new clue with additionalText, imagePath, and mediaType
+        const clue = new Clue({ text, teamName, additionalText, imagePath, mediaType });
         await clue.save();
         res.status(201).json(clue);
     } catch (error) {

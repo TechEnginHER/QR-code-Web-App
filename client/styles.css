@@ -319,9 +319,10 @@ button:active {
 #qr-popup h2 {
     margin-top: 0;
 }
-#qr-info-img{
-    width: -webkit-fill-available; 
+#qr-info{
+    display: contents;
 }
+
 button#save-clue-btn{
     background-color: #2c140c;
     color: #fff;

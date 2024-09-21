@@ -16,8 +16,8 @@ const clues = [
     ['clue9', 'images/clue9.png'],
     ['clue10', 'images/clue10.png'],
     ['clue11', 'images/clue11.png'],
-    ['clueVideo', 'images/clueVideo.mp4'],
-    ['clueGif', { type: 'gif', path: 'images/clueGif.gif', text: 'Additional text for GIF clue' }],
+    ['clueVideo', {type: 'video' , path:'images/clueVideo.mp4', text: 'Le 4ème et dernier personnage louche envoyait des signaux lumineux très bizarres pendant pratiquement 8 minutes. Je l’ai filmé à son insu. Défi d’équipe 3: en marchant vers le prochain indice, chacun indique aux autres quel sport il a déjà fait avec (ou contre) Claire, et si elle a été mauvaise joueuse en cas de défaite'}],
+    ['clueGif', { type: 'gif', path: 'images/clueGif.gif', text: 'Nope!' }],
 ];
 
 // Create a Map for faster lookups
@@ -60,6 +60,15 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.querySelector('.scan-qr-btn').addEventListener('click', handleUserInteraction);
+function handleUserInteraction() {
+    audio.muted = true;
+    audio.play().then(() => {
+        userInteractionOccurred = true;
+        audio.pause();
+        audio.muted = false;
+        console.log('User interaction registered. Ready to play sound on QR detection.');
+    }).catch(error => console.error('Error during user interaction:', error));
+}
 
 async function loadQrScanner() {
     try {
@@ -102,27 +111,24 @@ function showPopup(qrContent) {
 
     if (clueMap.has(qrContent)) {
         const clueData = clueMap.get(qrContent);       
-        if (typeof clueData === 'string') {
-            // Handle image and video
-            if (clueData.endsWith('.mp4')) {
-                qrInfo.innerHTML = `<video src="${clueData}" controls></video>`;
-            } else {
-                qrInfo.innerHTML = `<img src="${clueData}" alt="Clue">`;
-            }
-        } else if (typeof clueData === 'object' && clueData.type === 'gif') {
-            // Handle GIF with additional text
-            qrInfo.innerHTML = `
-                <img src="${clueData.path}" alt="GIF Clue" id = "qr-info-img">
-                <p>${clueData.text}</p>
-            `;
-        }       
+            if (typeof clueData === 'string') 
+                { qrInfo.innerHTML = `<video src="${clueData}" style="width: 90vw" controls></video>`;}                
+        
+            else if (typeof clueData === 'object' && clueData.type === 'gif') 
+                {   // Handle GIF with additional text
+                qrInfo.innerHTML = `
+                 <p style="font-size: 2em; font-weight: 700">${clueData.text}</p>
+                <img src="${clueData.path}" alt="GIF Clue" id = "qr-info-img" style="width: 90vw>`;
+                 } 
+            else 
+                 {qrInfo.innerHTML = `<img src="${clueData}" alt="Clue" style="width: 90vw">`;}         
         popup.style.display = 'flex';
-        saveButton.onclick = () => saveClue(qrContent);
+        saveButton.onclick = () => saveClue(qrContent);    
     } else {
         showMessage('Indice inconnu');
         resumeScanning();
-    }
-}
+}};
+
 
 function closePopup() {
     document.getElementById('qr-popup').style.display = 'none';
@@ -198,14 +204,4 @@ function updateTeamName() {
     if (teamNameElement) {
         teamNameElement.textContent = teamName ? `Équipe: ${teamName}` : 'Équipe: Inconnue';
     }
-}
-
-function handleUserInteraction() {
-    audio.muted = true;
-    audio.play().then(() => {
-        userInteractionOccurred = true;
-        audio.pause();
-        audio.muted = false;
-        console.log('User interaction registered. Ready to play sound on QR detection.');
-    }).catch(error => console.error('Error during user interaction:', error));
 }
