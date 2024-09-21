@@ -1,22 +1,6 @@
 const backendURL = 'https://qrcodescavengerhuntwebapp.onrender.com';
 
 document.addEventListener('DOMContentLoaded', displaySavedClues);
-
-document.querySelector('#first-scan').addEventListener('click', handleUserInteraction);
-function handleUserInteraction() {
-    let userInteractionOccurred = false;
-    const audio = new Audio('330046__paulmorek__beep-03-positive.mp3');
-    audio.muted = true;
-    audio.play().then(() => {
-        userInteractionOccurred = true;
-        audio.pause();
-        audio.muted = false;
-        console.log('User interaction registered. Ready to play sound on QR detection.');
-    }).catch((error) => {
-        console.error('Error during user interaction:', error);
-    });
-}
-
 async function displaySavedClues() {
     const cluesList = document.getElementById('clues-list');
     const teamName = sessionStorage.getItem('teamName');
@@ -69,14 +53,26 @@ async function displaySavedClues() {
     }
 }
 
-
-
 function updateTeamName() {
     const teamName = sessionStorage.getItem('teamName');
     const teamNameElement = document.getElementById('teamName');
     if (teamNameElement) {
         teamNameElement.textContent = teamName ? `Équipe: ${teamName}` : 'Équipe: Inconnue';
     }
+}
+document.getElementById('first-scan').addEventListener('click', handleUserInteraction);
+function handleUserInteraction() {
+    let userInteractionOccurred = false;
+    const audio = new Audio('330046__paulmorek__beep-03-positive.mp3');
+    audio.muted = true;
+    audio.play().then(() => {
+        userInteractionOccurred = true;
+        audio.pause();
+        audio.muted = false;
+        console.log('User interaction registered. Ready to play sound on QR detection.');
+    }).catch((error) => {
+        console.error('Error during user interaction:', error);
+    });
 }
 
 // Call updateTeamName when the page loads
