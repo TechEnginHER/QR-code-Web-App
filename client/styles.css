@@ -7,7 +7,9 @@ body {
     position: relative;
    /* height: 99.9vh;*/
 }
-
+img {
+    min-height: 350px;
+}
 /* Hero section styles */
 .hero {
     color: #a87255;
