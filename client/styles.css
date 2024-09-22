@@ -418,9 +418,9 @@ button#save-clue-btn{
 }
 
 
-@media screen and (min-width: 440px) {
+@media screen and (min-width: 460px) {
     body{
-        max-width: 440px;
+        max-width: 460px !important;
         margin: auto;
         display: flex;
         flex-direction: column;
@@ -432,5 +432,11 @@ button#save-clue-btn{
     }
     *:not(html){
         max-width: 440px;
+    }
+    .popup{
+        left: auto;
+    }
+    .spinner-overlay{
+        left: auto;
     }
 }
