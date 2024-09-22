@@ -23,7 +23,7 @@ async function displaySavedClues() {
                 const li = document.createElement('li');
                 li.classList.add('clue-item');
                 
-                if (clue.imagePath.endsWith('.jpg')) {
+                if (clue.imagePath.endsWith('.png')) {
                     li.innerHTML = `
                         <img src="${clue.imagePath}" alt="Clue ${index + 1}">
                         ${clue.additionalText ? `<p>${clue.additionalText}</p>` : ''}
@@ -38,7 +38,7 @@ async function displaySavedClues() {
                     // For video files
                     li.innerHTML = `
                         ${clue.additionalText ? `<p>${clue.additionalText}</p>` : ''}
-                        <video src="${clue.imagePath}" controls></video>
+                        <video src="${clue.imagePath}" style="width: 90vw" controls></video>
                     `;
                     li.innerHTML += `
                         <p>Défi d’équipe 3: en marchant vers le prochain indice, chacun indique aux 
