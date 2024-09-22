@@ -446,3 +446,8 @@ button#save-clue-btn{
         left: auto;
     }
 }
+@media (max-height: 600px) {
+    div#qr-info p{
+        font-size: unset !important;
+    }
+  }

@@ -125,7 +125,7 @@ function showPopup(qrContent) {
             wrapper.style.flexDirection = 'column';
             wrapper.style.alignItems = 'center';
             wrapper.style.justifyContent = 'center';
-            qrInfo.innerHTML += `<h2 style="margin-block-end: 0;">Indice No. 12</h2>`;
+            qrInfo.innerHTML += `<h2 style="font-size: 1.5em;">Indice No. 12</h2>`;
             qrInfo.innerHTML += `<p style="font-size: 2em; margin-block-start: 0; font-weight: 700;">${clueData.text}</p>`;
             qrInfo.innerHTML += `<img src="${clueData.path}" alt="GIF Clue" id="qr-info-img" style="width: 90vw">`;
         } 
