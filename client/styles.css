@@ -430,4 +430,7 @@ button#save-clue-btn{
     html{
         background-color: #ddd;
     }
+    *{
+        max-width: 440px;
+    }
 }
