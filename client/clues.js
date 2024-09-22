@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', displaySavedClues);
 async function displaySavedClues() {
     const cluesList = document.getElementById('clues-list');
     const teamName = sessionStorage.getItem('teamName');
-
+    cluesList.style.minHeight = '350px'
     try {
         const response = await fetch(`${backendURL}/clues/${teamName}`);
         const clues = await response.json();
