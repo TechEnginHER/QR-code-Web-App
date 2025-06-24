@@ -10,25 +10,25 @@ An interactive, mobile-first web app built to enable users sign up as teams, sca
 ## 🛠️ Getting Started
 To run the project locally:
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/TechEnginHER/QR-code-Web-App.git
-   ```
+#### 1. Clone the repository:
+```bash
+git clone https://github.com/TechEnginHER/QR-code-Web-App.git
+```
    
-3. Install dependencies:
-    ```bash
-   npm install
-    ```
+#### 2. Install dependencies:
+```bash
+npm install
+```
 
-5. Set up environment variables. Create a .env file in the root directory and add your MongoDB connection string:
-   ```bash
-   MONGO_URI=your_mongodb_connection_string
-   ```
+#### 3. Set up environment variables. Create a .env file in the root directory and add your MongoDB connection string:
+```bash
+MONGO_URI=your_mongodb_connection_string
+```
 
-7. Start the development server
-    ```bash
-   npm start
-    ```
+#### 4. Start the development server
+```bash
+npm start
+```
 
 ## 🌟 Overview
 This app allows users to:
