@@ -11,7 +11,7 @@ An interactive, mobile-first web app built to enable users sign up as teams, sca
 To run the project locally:
 
 1. Clone the repository:
-   `git clone https://github.com/yourusername/qr-scavenger-hunt.git`
+   `git clone https://github.com/TechEnginHER/QR-code-Web-App.git`
    
 2. Install dependencies:
     `npm install`
