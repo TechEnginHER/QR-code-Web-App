@@ -11,13 +11,24 @@ An interactive, mobile-first web app built to enable users sign up as teams, sca
 To run the project locally:
 
 1. Clone the repository:
-   `git clone https://github.com/TechEnginHER/QR-code-Web-App.git`
+   ```bash
+   git clone https://github.com/TechEnginHER/QR-code-Web-App.git
+   ```
    
-2. Install dependencies:
-    `npm install`
-   
-3. Start the server:
-    `npm start`
+3. Install dependencies:
+    ```bash
+   npm install
+    ```
+
+5. Set up environment variables. Create a .env file in the root directory and add your MongoDB connection string:
+   ```bash
+   MONGO_URI=your_mongodb_connection_string
+   ```
+
+7. Start the development server
+    ```bash
+   npm start
+    ```
 
 ## 🌟 Overview
 This app allows users to:
@@ -31,8 +42,9 @@ This app allows users to:
 ## 🔧 Tech Stack
 
 - **Frontend:** HTML, CSS, JavaScript  
-- **Backend:** Node.js, Express  
-- **QR Scanning:** JS-based scanner library  
+- **Backend:** Node.js, Express
+- **Database:** MongoDB (Mongoose)  
+- **QR Scanning:** [qr-scanner](https://github.com/nimiq/qr-scanner) 
 - **Language:** French 🇫🇷
 
 
